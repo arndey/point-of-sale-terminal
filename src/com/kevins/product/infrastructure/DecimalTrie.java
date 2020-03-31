@@ -4,24 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: переименовать
-public class DecimalTrie {
+public class DecimalTrie<T> {
 
-    private DecimalTrieNode root;
+    private DecimalTrieNode<T> root;
 
-    public static DecimalTrie create() {
-        return new DecimalTrie();
-    }
+    public DecimalTrie() {}
 
-    public void add(Object value, byte[] key) {
+    public void add(T value, byte[] key) {
         if (root == null) {
-            root = new DecimalTrieNode(key[0]);
+            root = new DecimalTrieNode<>(key[0]);
         }
 
-        DecimalTrieNode current = root;
+        DecimalTrieNode<T> current = root;
         for (byte i = 1; i < key.length; i++) {
-            DecimalTrieNode child = current.getChild(key[i]);
+            DecimalTrieNode<T> child = current.getChild(key[i]);
             if (child == null) {
-                child = current.addIfAbsent(key[i]);
+                child = current.addChild(key[i]);
             }
 
             current = child;
@@ -33,18 +31,35 @@ public class DecimalTrie {
         }
     }
 
-    public List<Object> findAllByPrefix(byte[] prefix) {
-        List<Object> result = new ArrayList<>();
+    public List<T> findAllByPrefix(byte[] prefix) {
+        List<T> values = new ArrayList<>();
 
         if (root == null) {
-            return result;
+            return values;
         }
 
-        DecimalTrieNode current = root;
-        for (byte i = 0; i < prefix.length; i++) {
+        DecimalTrieNode<T> current = root;
+        for (byte i : prefix) {
+            DecimalTrieNode<T> child = current.getChild(i);
+            if (child == null) {
+                break;
+            }
 
+            current = child;
         }
 
-        return new ArrayList<>();
+        findAllValues(values, current);  // TODO: мб перенести и переименовать
+
+        return values;
+    }
+
+    private void findAllValues(List<T> values, DecimalTrieNode<T> current) {
+        for (DecimalTrieNode<T> child : current.getChildren().values()) {
+            if (child.isFinal()) {
+                values.add(child.getValue());
+            }
+
+            findAllValues(values, child);
+        }
     }
 }

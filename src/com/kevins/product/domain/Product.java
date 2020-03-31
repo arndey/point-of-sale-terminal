@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class Product {
 
-    @CsvBindByPosition(position=0)
+    @CsvCustomBindByPosition(converter = StringToByteArrayConverter.class, position=0)
     private byte[] id;
 
     @CsvBindByPosition(position=1)

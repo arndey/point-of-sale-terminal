@@ -4,7 +4,7 @@ import com.opencsv.bean.AbstractBeanField;
 
 public class TaxTypeConverter extends AbstractBeanField<String> {
     @Override
-    protected Object convert(String s) {
+    protected TaxType convert(String s) {
         return TaxType.valueOf(s.toUpperCase());
     }
 }

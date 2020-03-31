@@ -1,15 +1,17 @@
 package com.kevins.product.infrastructure;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
-public class DecimalTrieNode {
+// TODO: какой-то интерфейс для T чтобы чекать ид
+public class DecimalTrieNode<T> {
 
     private byte keyPart;
 
-    private Object value;
+    private T value;
 
-    private HashMap<Byte, DecimalTrieNode> children;
+    private HashMap<Byte, DecimalTrieNode<T>> children;
 
     private boolean isFinal;
 
@@ -19,24 +21,15 @@ public class DecimalTrieNode {
         this.isFinal = false;
     }
 
-    public DecimalTrieNode getChild(byte keyPart) {
+    public DecimalTrieNode<T> getChild(byte keyPart) {
         return children.get(keyPart);
     }
 
-    public DecimalTrieNode addIfAbsent(DecimalTrieNode node) {
-        return children.putIfAbsent(node.getKeyPart(), node);
-    }
+    public DecimalTrieNode<T> addChild(byte keyPart) {
+        DecimalTrieNode<T> child = new DecimalTrieNode<>(keyPart);
+        children.put(keyPart, child);
 
-    public DecimalTrieNode addIfAbsent(byte keyPart) {
-        return children.putIfAbsent(keyPart, new DecimalTrieNode(keyPart));
-    }
-
-    public DecimalTrieNode add(DecimalTrieNode node) {
-        return children.put(node.getKeyPart(), node);
-    }
-
-    public DecimalTrieNode add(byte keyPart) {
-        return children.put(keyPart, new DecimalTrieNode(keyPart));
+        return child;
     }
 
     // ====================================================================
@@ -49,15 +42,11 @@ public class DecimalTrieNode {
         this.keyPart = keyPart;
     }
 
-    public Object getValue() {
-        return value;
-    }
-
-    public HashMap<Byte, DecimalTrieNode> getChildren() {
+    public HashMap<Byte, DecimalTrieNode<T>> getChildren() {
         return children;
     }
 
-    public void setChildren(HashMap<Byte, DecimalTrieNode> children) {
+    public void setChildren(HashMap<Byte, DecimalTrieNode<T>> children) {
         this.children = children;
     }
 
@@ -69,7 +58,11 @@ public class DecimalTrieNode {
         isFinal = aFinal;
     }
 
-    public void setValue(Object value) {
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(T value) {
         if (!isFinal) return;  // TODO: обдумать
 
         this.value = value;
