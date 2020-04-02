@@ -1,7 +1,6 @@
 package com.kevins.product.infrastructure;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 // TODO: какой-то интерфейс для T чтобы чекать ид
@@ -15,10 +14,16 @@ public class DecimalTrieNode<T> {
 
     private boolean isFinal;
 
+    private boolean isRoot;
+
+    DecimalTrieNode() {
+        this.isRoot = true;
+        this.children = new HashMap<>();
+    }
+
     DecimalTrieNode(byte keyPart) {
         this.keyPart = keyPart;
         this.children = new HashMap<>();
-        this.isFinal = false;
     }
 
     public DecimalTrieNode<T> getChild(byte keyPart) {
@@ -68,20 +73,29 @@ public class DecimalTrieNode<T> {
         this.value = value;
     }
 
+    public boolean isRoot() {
+        return isRoot;
+    }
+
+    public void setRoot(boolean root) {
+        isRoot = root;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DecimalTrieNode)) return false;
-        DecimalTrieNode that = (DecimalTrieNode) o;
+        DecimalTrieNode<?> that = (DecimalTrieNode<?>) o;
         return getKeyPart() == that.getKeyPart() &&
                 isFinal() == that.isFinal() &&
+                isRoot() == that.isRoot() &&
                 Objects.equals(getValue(), that.getValue()) &&
                 Objects.equals(getChildren(), that.getChildren());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKeyPart(), getValue(), getChildren(), isFinal());
+        return Objects.hash(getKeyPart(), getValue(), getChildren(), isFinal(), isRoot());
     }
 
     @Override
@@ -91,6 +105,7 @@ public class DecimalTrieNode<T> {
                 ", value=" + value +
                 ", children=" + children +
                 ", isFinal=" + isFinal +
+                ", isRoot=" + isRoot +
                 '}';
     }
 }

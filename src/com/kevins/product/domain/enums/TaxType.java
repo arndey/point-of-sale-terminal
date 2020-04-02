@@ -1,4 +1,4 @@
-package com.kevins.product.domain;
+package com.kevins.product.domain.enums;
 
 public enum TaxType {
 

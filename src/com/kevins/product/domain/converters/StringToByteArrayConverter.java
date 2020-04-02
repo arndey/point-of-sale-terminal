@@ -1,10 +1,10 @@
-package com.kevins.product.domain;
+package com.kevins.product.domain.converters;
 
 import com.opencsv.bean.AbstractBeanField;
 
 public class StringToByteArrayConverter extends AbstractBeanField<String> {
     @Override
-    protected byte[] convert(String s) {
+    public byte[] convert(String s) {
         int length = s.length();
 
         char[] chars = s.toCharArray();
