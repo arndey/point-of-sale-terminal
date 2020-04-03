@@ -118,7 +118,7 @@ public class Terminal {
                     product.getName(), product.getPrice()
             ));
         } else {
-            println("Which one do you mean?");
+            println("Select one of: ");
             products.forEach(p -> println(p.getIdAsString()));
 
             System.out.println();
