@@ -1,9 +1,8 @@
-package com.kevins.product.infrastructure;
+package com.kevins.infrastructure;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-// TODO: какой-то интерфейс для T чтобы чекать ид
 public class DecimalTrieNode<T> {
 
     private byte keyPart;
@@ -96,16 +95,5 @@ public class DecimalTrieNode<T> {
     @Override
     public int hashCode() {
         return Objects.hash(getKeyPart(), getValue(), getChildren(), isFinal(), isRoot());
-    }
-
-    @Override
-    public String toString() {
-        return "DecimalTrieNode{" +
-                "keyPart=" + keyPart +
-                ", value=" + value +
-                ", children=" + children +
-                ", isFinal=" + isFinal +
-                ", isRoot=" + isRoot +
-                '}';
     }
 }

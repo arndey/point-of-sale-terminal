@@ -1,6 +1,6 @@
-package com.kevins.product.domain.converters;
+package com.kevins.domain.converters;
 
-import com.kevins.product.domain.enums.TaxType;
+import com.kevins.domain.enums.TaxType;
 import com.opencsv.bean.AbstractBeanField;
 
 public class TaxTypeConverter extends AbstractBeanField<String> {

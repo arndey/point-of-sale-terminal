@@ -1,6 +1,6 @@
 package com.kevins;
 
-import com.kevins.product.application.Terminal;
+import com.kevins.application.Terminal;
 
 public class Application {
 
@@ -12,13 +12,13 @@ public class Application {
 
     public static void main(String[] args) {
 
-        System.out.println("\n\n***************************");
-        System.out.println("*** Terminal loading... ***");
+        System.out.println("\n\n**************************");
+        System.out.println("*** Loading...         ***");
         terminal.initTrie(args[0]);
 
-        System.out.println("***                     ***");
-        System.out.println("*** Terminal are ready! ***");
-        System.out.println("***************************\n\n");
+        System.out.println("**************************");
+        System.out.println("*** Terminal is ready! ***");
+        System.out.println("**************************\n\n");
         terminal.start();
     }
 }

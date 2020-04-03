@@ -1,9 +1,8 @@
-package com.kevins.product.infrastructure;
+package com.kevins.infrastructure;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: переименовать
 public class DecimalTrie<T> {
 
     private DecimalTrieNode<T> root;
@@ -45,12 +44,12 @@ public class DecimalTrie<T> {
             current = child;
         }
 
-        findAllValues(values, current);  // TODO: мб перенести и переименовать
+        allNodeValues(values, current);
 
         return values;
     }
 
-    private void findAllValues(List<T> values, DecimalTrieNode<T> current) {
+    private void allNodeValues(List<T> values, DecimalTrieNode<T> current) {
         if (current == null) {
             return;
         } else if (current.isFinal()) {
@@ -63,7 +62,7 @@ public class DecimalTrie<T> {
                 return;
             }
 
-            findAllValues(values, child);
+            allNodeValues(values, child);
         }
     }
 }

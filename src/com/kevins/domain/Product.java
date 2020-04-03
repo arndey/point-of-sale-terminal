@@ -1,13 +1,12 @@
-package com.kevins.product.domain;
+package com.kevins.domain;
 
-import com.kevins.product.domain.converters.StringToByteArrayConverter;
-import com.kevins.product.domain.converters.TaxTypeConverter;
-import com.kevins.product.domain.enums.TaxType;
+import com.kevins.domain.converters.StringToByteArrayConverter;
+import com.kevins.domain.converters.TaxTypeConverter;
+import com.kevins.domain.enums.TaxType;
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvCustomBindByPosition;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 public class Product {
 
@@ -50,11 +49,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + Arrays.toString(id) +
-                ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
-                ", taxType=" + taxType.getDescription() +
-                '}';
+        return "name=" + name +
+                ", id=" + getIdAsString() +
+                ", price=" + price +
+                ", taxType=" + taxType;
     }
 }
